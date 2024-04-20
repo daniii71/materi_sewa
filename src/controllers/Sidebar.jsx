@@ -44,7 +44,7 @@ function Sidebar() {
           <li className="nav-item">
             <a href="/data" className="nav-link text-white">
               <i className="bi bi-building me-3"></i>
-              Data
+              Pelanggan
             </a>
           </li>
           <li className="nav-item">
