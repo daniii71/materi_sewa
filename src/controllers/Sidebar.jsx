@@ -31,42 +31,55 @@ function Sidebar() {
     <div>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <div className="sidebar-header">
-          <span className="fs-5">Sidebar</span>
+          <span className="fs-5">App <i className="bi bi-apple"></i></span>
         </div>
         <hr />
         <ul className="nav flex-column">
           <li className="nav-item">
-            <a href="" className="nav-link text-white">
-              <i className="bi bi-person me-3"></i>
-              Dasbord
+            <a href="/Dashboard" className="nav-link text-white">
+              <i className="bi bi-house-dash-fill"></i>
+              Dashboard
             </a>
           </li>
           <li className="nav-item">
-            <a href="/data" className="nav-link text-white">
-              <i className="bi bi-building me-3"></i>
+            <a href="/data-pelanggan" className="nav-link text-white">
+              <i className="bi bi-person-workspace"></i>
               Pelanggan
             </a>
           </li>
           <li className="nav-item">
-            <a href="/data" className="nav-link text-white">
-              <i className="bi bi-book me-3"></i>
-              Data
+            <a href="/data-ruang" className="nav-link text-white">
+              <i className="bi bi-shop"></i>
+              Ruang
             </a>
           </li>
           <li className="nav-item">
-            <a href="/data" className="nav-link text-white">
-              <i className="bi bi-person-circle me-3"></i>
-              Data Guru
+            <a href="/data-kamar" className="nav-link text-white">
+              <i className="bi bi-buildings"></i>
+              Kamar
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="/data-tambah" className="nav-link text-white">
+              <i className="bi bi-pc-display-horizontal"></i>
+              Data Tambah
             </a>
           </li>
           <li className="nav-item">
             <a href="/" className="nav-link text-white" onClick={logout}>
-              <i className="bi bi-box-arrow-right me-2"></i>
+              <i className="bi bi-box-arrow-right"></i>
               Logout
             </a>
           </li>
         </ul>
-        <hr />
+        <button
+        className={`sidebar-toggle btn btn-link btn-sm ${
+          isOpen ? "open" : ""
+        }`}
+        onClick={toggleSidebar}
+      >
+        <i className="bi bi-list"></i>
+      </button>
       </div>
     </div>
   );

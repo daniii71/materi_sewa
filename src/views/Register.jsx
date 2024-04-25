@@ -12,7 +12,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,8 +25,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email.trim() === "" || password.trim() === "") {
-      setErrorMessage("Email dan password harus diisi.");
+    if (username.trim() === "" || password.trim() === "") {
+      setErrorMessage("Username dan password harus diisi.");
       return;
     }
 
@@ -48,15 +48,15 @@ function Register() {
     try {
       const response = await axios.post(`
       http://localhost:8080/register`, {
-        email,
+        username,
         password,
         role,
       });
 
-      if (response.data === "Email already taken") {
+      if (response.data === "Username already taken") {
         Swal.fire({
           icon: "error",
-          title: "Email sudah terdaftar. Pilih Email lain.",
+          title: "Username sudah terdaftar. Pilih Username lain.",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -101,12 +101,12 @@ function Register() {
                     </span>
                     <input
                       type="text"
-                      id="email"
+                      id="username"
                       className="form-control"
-                      placeholder="Email"
+                      placeholder="Username"
                       required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className="input-group mb-4">
@@ -149,14 +149,14 @@ function Register() {
               </div>
             </div>
             <div
-              className="card bg-info py-5 d-md-down-none"
+              className="card bg-secondary py-5 d-md-down-none"
               style={{ width: "100%" }}
             >
               <div className="card-body text-center">
                 <div className="mt-3 text-left">
                   <h2 style={{ color: "white" }}>Sign up</h2>
                   <p className="mt-3" style={{ color: "white" }}>
-                    Silahkan Register dulu dengan masukan username role password
+                    Silahkan Register dulu dengan masukan username dan password
                   </p>
                 </div>
               </div>

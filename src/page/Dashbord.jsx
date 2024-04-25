@@ -6,7 +6,7 @@ function Dashbord() {
     <div>
         <Login/>
     </div>
-  )
+  );
 }
 
-export default Dashbord
+export default Dashbord;

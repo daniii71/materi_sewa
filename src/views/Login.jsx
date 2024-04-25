@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("admin");
-  const [loginError, setLoginError] = useState(""); // Menambah state untuk menyimpan pesan error login
+  const [loginError, setLoginError] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -19,16 +19,16 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     const data = {
-      email: email,
+      username: username,
       password: password,
-      role: role,
+      role: role, // Menggunakan nilai role di sini
     };
-
+  
     try {
       const response = await axios.post(`http://localhost:8080/login`, data);
-
+  
       if (response.status === 200) {
         Swal.fire({
           icon: "success",
@@ -36,21 +36,21 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-
-        // Redirect user to dashboard after successful login
+  
         setTimeout(() => {
           window.location.href = "/Sidebar";
         }, 1500);
-
+  
         localStorage.setItem("id", response.data.userData.id);
         localStorage.setItem("role", response.data.userData.role);
         localStorage.setItem("token", response.data.token);
       }
     } catch (error) {
-      setLoginError("Email / Password Salah"); // Set pesan error login
+      setLoginError("Username / Password Salah");
       console.error(error);
     }
   };
+  
 
   return (
     <div id="main-wrapper" className="container mt-5">
@@ -60,7 +60,8 @@ const Login = () => {
             <div className="card p-2">
               <div className="card-body">
                 <h1>Login</h1>
-                <p className="text-muted">Sign In to your account</p>
+                <br />
+                {/* <p className="text-muted">Sign In to your account</p> */}
                 <form onSubmit={handleLogin}>
                   <div className="input-group mb-3">
                     <span className="input-group-addon">
@@ -68,12 +69,12 @@ const Login = () => {
                     </span>
                     <input
                       type="text"
-                      id="email"
+                      id="username"
                       className="form-control"
-                      placeholder="Email"
+                      placeholder="Username"
                       required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className="input-group mb-4">
@@ -95,7 +96,7 @@ const Login = () => {
                       onClick={togglePasswordVisibility}
                     >
                       <FontAwesomeIcon
-                        icon={showPassword ? faEye :  faEyeSlash}
+                        icon={showPassword ? faEye : faEyeSlash}
                       />
                     </button>
                   </div>
@@ -115,18 +116,18 @@ const Login = () => {
                 </form>
               </div>
             </div>
-            <div className="card bg-info py-5 d-md-down-none" style={{ width: '100%' }}> 
+            <div className="card bg-secondary py-5 d-md-down-none" style={{ width: '100%' }}> 
               <div className="card-body text-center"> 
                 <div className="mt-3 text-left"> 
                   <h2 style={{ color: 'white' }}>Sign up</h2> 
                   <p className="mt-3" style={{ color: 'white' }}>Masuk dengan mengisi username dan password</p> 
                   <Link 
-                      to="/Register" 
-                      className="btn btn-primary btn-lg active mt-3 text-uppercase" 
-                      style={{ backgroundColor: 'var(--bs-info-bg)', color: 'black' }} 
-                      > 
-                      Register 
-                    </Link> 
+                  to="/Register" 
+                  className="btn btn-outline-warning   px-4 mt-3 text-uppercase" 
+                >
+                  Register
+                </Link>
+
                 </div> 
               </div> 
             </div>
